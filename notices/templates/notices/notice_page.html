@@ -1,0 +1,16 @@
+
+{% extends 'notices/base.html' %}
+
+{% block content %}
+
+    <div class="container">
+		
+		<a href="{% url 'notices:home' %}">Back to homepage</a>
+    	<h1>{{ notice.title }}</h1>
+    	<p>{{ notice.created_by }}, {{ notice.created_at }}</p>
+    	<p>{{ notice.message }}</p>
+    	
+    </div>
+
+
+{% endblock %}

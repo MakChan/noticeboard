@@ -1,0 +1,32 @@
+
+{% extends 'notices/base.html' %}
+
+{% block title %}
+  Home - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+		<ol class="breadcrumb my-4">
+		    <li class="breadcrumb-item active">Notices</li>
+		</ol>
+
+	    <table class="table">
+
+	      <tbody>
+	        {% for notice in notices %}
+	          <tr>
+	            <td>
+	              <a href="{% url 'notices:notice_page' notice.id %}"> {{ notice.title }} </a><br>
+	            </td>
+	            <td>{{ notice.created_by }}</td>
+	            <td>{{ notice.created_at }}</td>
+	          </tr>
+	        {% endfor %}
+	      </tbody>
+	    </table>
+
+	</div>
+
+{% endblock %}
