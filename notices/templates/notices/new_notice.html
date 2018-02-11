@@ -1,0 +1,21 @@
+
+{% extends 'notices/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}New Notice{% endblock %}
+
+{% block content %}
+
+		
+	<a href="{% url 'notices:home' %}">Back to homepage</a>
+
+	<form method="post" novalidate>
+	    {% csrf_token %}
+    	{% include 'notices/form.html' %}
+	    <button type="submit" class="btn btn-success">Post</button>
+	</form>
+
+
+
+{% endblock %}

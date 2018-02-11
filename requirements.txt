@@ -1,1 +1,2 @@
 Django==2.0.2
+django-widgets-improved==1.5.0
