@@ -1,7 +1,33 @@
+
 {% extends 'notices/base.html' %}
+{% load static %}
 
-{% block content %}
+    {% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+    {% endblock %}
 
-  <h2>Sign up</h2>
+    {% block navbar %}
+    {% endblock %}
 
-{% endblock %}
+
+	{% block content %}
+
+		<div class="row justify-content-center card-form">
+	      <div class="col-lg-7 col-md-8 col-sm-12">
+	        <div class="card">
+	          <div class="card-body">
+	            <h3 class="card-title">Sign up</h3>
+	            <form method="post" novalidate>
+	              {% csrf_token %}
+	              {% include 'notices/form.html' %}
+	              <button type="submit" class="btn btn-primary btn-block">Create an account</button>
+	            </form>
+	          </div>
+	          <div class="card-footer text-muted text-center">
+	            Already have an account? <a href="#">Log in</a>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+
+	{% endblock %}
