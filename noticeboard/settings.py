@@ -119,4 +119,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LOGIN_REDIRECT_URL = 'notices:home'
 LOGOUT_REDIRECT_URL = 'notices:home'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGIN_URL = 'accounts:login'
