@@ -1,14 +1,25 @@
 
 {% extends 'notices/base.html' %}
 
-{% block content %}
 
-		
-		<a href="{% url 'notices:home' %}">Back to homepage</a>
-		
-    	<h1>{{ notice.title }}</h1>
-    	<p>{{ notice.created_by }}, {{ notice.created_at }}</p>
-    	<p>{{ notice.message }}</p>
-    	
+{% block content %}
+    <div class="card mb-2 mt-5">
+      <div class="card-body p-3">
+
+		<h3 class="p-3">{{ notice.title }}</h3>
+
+		<div class="row mb-3 p-3">
+		  <div class="col-6">
+		    <strong class="text-muted">by {{ notice.created_by }}</strong>
+		  </div>
+		  <div class="col-6 text-right">
+		    <small class="text-muted">at {{ notice.created_at }}</small>
+		  </div>
+		</div>
+
+		<p class="p-3">{{ notice.message }}</p>
+	    	
+	    </div>
+	</div>
 
 {% endblock %}

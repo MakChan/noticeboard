@@ -22,7 +22,7 @@ class HomeTests(TestCase):
         self.assertContains(self.response, 'href="{0}"'.format(notices_url))
 
     def test_home_view_contains_new_notice_link(self):
-        new_notice_url = reverse('notices:new_notice')
+        new_notice_url = reverse('notices:home')
         self.assertContains(self.response, 'href="{0}"'.format(new_notice_url))      
 
 
@@ -117,3 +117,15 @@ class NewNoticeTests(TestCase):
         response = self.client.post(url, data)
         self.assertEquals(response.status_code, 200)
         self.assertFalse(Notice.objects.exists())
+
+
+
+class LoginRequiredNewTopicTests(TestCase):
+    def setUp(self):
+        Notice.objects.create(title='Notice Title', message='Notice Description.', created_by_id=1)
+        self.url = reverse('notices:new_notice', kwargs={'notice_id': 1})
+        self.response = self.client.get(self.url)
+
+    def test_redirection(self):
+        login_url = reverse('accounts:login')
+        self.assertRedirects(self.response, '{login_url}?next={url}'.format(login_url=login_url, url=self.url))        
