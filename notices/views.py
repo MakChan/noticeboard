@@ -3,10 +3,23 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Notice, User
 from .forms import NewNoticeForm
+from django.views.generic import ListView, UpdateView
 
-def home(request) :
-	notices = Notice.objects.all()
-	return render(request, 'notices/home.html', {'notices': notices})
+
+class NoticeListView(ListView):
+    model = Notice
+    context_object_name = 'notices'
+    template_name = 'notices/home.html'
+    paginate_by = 10
+
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        queryset = Notice.objects.order_by('-created_at')
+        return queryset
+
 
 @login_required
 def notice_page(request, notice_id) :
@@ -27,6 +40,4 @@ def new_notice(request) :
     else:
         form = NewNoticeForm()
     return render(request, 'notices/new_notice.html', {'form': form})
-
-
 

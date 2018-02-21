@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse, resolve
-from .views import home, notice_page, new_notice
+from .views import notice_page, new_notice, BoardListView
 from .models import Notice, User
 from .forms import NewNoticeForm
 
@@ -15,7 +15,7 @@ class HomeTests(TestCase):
 
     def test_home_url_resolves_home_view(self):
         view = resolve('/')
-        self.assertEquals(view.func, home)
+        self.assertEquals(view.func.view_class, BoardListView)
 
     def test_home_view_contains_link_to_notices_page(self):
         notices_url = reverse('notices:notice_page', kwargs={'notice_id': self.notice.id})

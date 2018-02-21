@@ -1,6 +1,6 @@
 
 {% extends 'notices/base.html' %}
-
+{% load humanize %}
 
 {% block content %}
     <div class="card mb-2 mt-5">
@@ -13,11 +13,11 @@
 		    <strong class="text-muted">by {{ notice.created_by }}</strong>
 		  </div>
 		  <div class="col-6 text-right">
-		    <small class="text-muted">at {{ notice.created_at }}</small>
+		    <small class="text-muted">posted {{ notice.created_at|naturaltime }}</small>
 		  </div>
 		</div>
 
-		<p class="p-3">{{ notice.message }}</p>
+		<p class="p-3">{{ notice.get_message_as_markdown }}</p>
 	    	
 	    </div>
 	</div>

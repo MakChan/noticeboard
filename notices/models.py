@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.html import mark_safe
+from markdown import markdown
 
 
 class Notice(models.Model):
@@ -10,3 +12,6 @@ class Notice(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_message_as_markdown(self):
+        return mark_safe(markdown(self.message, safe_mode='escape'))        
