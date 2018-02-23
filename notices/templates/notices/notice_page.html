@@ -17,9 +17,22 @@
 		  </div>
 		</div>
 
-		<p class="p-3">{{ notice.get_message_as_markdown }}</p>
+		<div class="p-3">{{ notice.get_message_as_markdown }}</div>
+
+		{% if notice.tags %}
+			<span class="p-3">
+			Tags:
+			</span>
+			<span class="p-3">
+				{% for tag in notice.get_tags_as_list%}
+					<a href="{% url 'notices:tag' tag %}"> {{ tag }} </a>
+
+				{% endfor %}
+			</span>
+		{% endif %}
+
 	    	
-	    </div>
+	   </div>
 	</div>
 
 {% endblock %}

@@ -8,63 +8,65 @@
 {% endblock %}
 
 {% block content %}
+	
 
 		<ol class="breadcrumb my-4">
-		    <li class="breadcrumb-item active">Notices</li>
+		    <li class="breadcrumb-item active"> Notices </li>
 		</ol>
-
 	    <table class="table">
 	      <tbody>
-	        {% for notice in notices %}
-	          <tr>
-	            <td>
-	              <a href="{% url 'notices:notice_page' notice.id %}"> {{ notice.title }} </a><br>
-	            </td>
-	            <td>{{ notice.created_by }}</td>
-	            <td>{{ notice.created_at|naturaltime }}</td>
-	          </tr>
-	        {% endfor %}
-	      </tbody>
+	      	{% if notices %}
+		        {% for notice in notices %}
+		          <tr>
+		            <td>
+		              <a href="{% url 'notices:notice_page' notice.id %}"> {{ notice.title }} </a><br>
+		            </td>
+		            <td>{{ notice.created_by }}</td>
+		            <td>{{ notice.created_at|naturaltime }}</td>
+		          </tr>
+		        {% endfor %}
+		      </tbody>
+		     {% endif %}
 	    </table>
- {% if is_paginated %}
-    <nav aria-label="Topics pagination" class="mb-4">
-      <ul class="pagination">
-        {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-          </li>
-        {% else %}
-          <li class="page-item disabled">
-            <span class="page-link">Previous</span>
-          </li>
-        {% endif %}
 
-        {% for page_num in paginator.page_range %}
-          {% if page_obj.number == page_num %}
-            <li class="page-item active">
-              <span class="page-link">
-                {{ page_num }}
-                <span class="sr-only">(current)</span>
-              </span>
-            </li>
-          {% else %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
-            </li>
-          {% endif %}
-        {% endfor %}
+		 {% if is_paginated %}
+		    <nav aria-label="Topics pagination" class="mb-4">
+		      <ul class="pagination">
+		        {% if page_obj.has_previous %}
+		          <li class="page-item">
+		            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		          </li>
+		        {% else %}
+		          <li class="page-item disabled">
+		            <span class="page-link">Previous</span>
+		          </li>
+		        {% endif %}
 
-        {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-          </li>
-        {% else %}
-          <li class="page-item disabled">
-            <span class="page-link">Next</span>
-          </li>
-        {% endif %}
-      </ul>
-    </nav>
-  {% endif %}
+		        {% for page_num in paginator.page_range %}
+		          {% if page_obj.number == page_num %}
+		            <li class="page-item active">
+		              <span class="page-link">
+		                {{ page_num }}
+		                <span class="sr-only">(current)</span>
+		              </span>
+		            </li>
+		          {% else %}
+		            <li class="page-item">
+		              <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+		            </li>
+		          {% endif %}
+		        {% endfor %}
 
+		        {% if page_obj.has_next %}
+		          <li class="page-item">
+		            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+		          </li>
+		        {% else %}
+		          <li class="page-item disabled">
+		            <span class="page-link">Next</span>
+		          </li>
+		        {% endif %}
+		      </ul>
+		    </nav>
+		  {% endif %}
 {% endblock %}
