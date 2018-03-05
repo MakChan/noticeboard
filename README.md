@@ -3,32 +3,27 @@
 
 ### About
 
-Website for posting notices for a college or school
+Website for posting notices or any other information by college/school/organization staff for the students/employees.
 
-Made using Django.
+Written in Django.
 
-<!-- ### Live demo  -->
+### Features
+* Administrators/teachers can sign in and post notices.
+* Individual pages for each notice.
+* Search notices by tags/categories.
+* Responsive design.
 
-<!-- ### Features
-* Responsive design
-* Multi user 
-* Create posts 
-* Individual pages for each user
-* Pagination
-* Optimized and fast -->
 
 
 ## How to setup
 
-Follow this guide to setup this project on your local machine.
-
-1. Install python 3.6, git and [virtualenv] in your computer.
+1. Install Python 3.6, Git and [Virtualenv] in your computer.
 
 2. Get the source code on your machine.
 
     `git clone https://github.com/MakChan/noticeboard.git`
 
-3. Create a python virtual environment and install Python and Django related dependencies.
+3. Create a Python virtual environment and install Python and Django related dependencies.
 
     ```shell
     cd noticeboard
@@ -48,5 +43,3 @@ Follow this guide to setup this project on your local machine.
 
 [virtualenv]: https://virtualenv.pypa.io/
 
-
-<!-- ### Roadmap :rocket: -->

@@ -20,35 +20,27 @@ class NoticeListView(ListView):
 		queryset = Notice.objects.order_by('-created_at')
 		return queryset
 
-def TagListView(request, tag):
+def TagView(request, tag):
 
 	notices = Notice.objects.filter(tags__icontains=tag+',').order_by('-created_at').values()
 	if len(notices) == 0:
-		return render(request, 'notices/no_tag.html', {})	
+		return render(request, 'notices/no_tag.html', {'tag':tag})
+
+	return render(request, 'notices/tag.html', {'notices': notices, 'tag':tag})
+
+def TagListView(request) :
+	queryset = Notice.objects.filter(tags__isnull=False).values_list('tags', flat=True)
+	tags = set(''.join(queryset).split(',')[:-1])
+	return render(request, 'notices/tags.html', {'tags': tags})
 
 
-
-	# notices = Notice.objects.filter(tags__isnull=False).order_by('-created_at').values()
-	# if len(notices) == 0:
-	# 	return render(request, 'notices/no_tag.html', {})
-
-	# filtered_notices = []
-	# for notice in notices:
-	# 	print(notice)
-	# 	if tag not in notice["tags"].split(" "):
-	# 		del notices[notice]
-
-	return render(request, 'notices/home.html', {'notices': notices})
-
-
-@login_required
-def notice_page(request, notice_id) :
+def NoticeView(request, notice_id) :
 	notice = get_object_or_404(Notice, id = notice_id)
 	return render(request, 'notices/notice_page.html', {'notice': notice})
 
 
 @login_required
-def new_notice(request) :
+def NewNoticePage(request) :
 
 	if request.method == 'POST':
 		form = NewNoticeForm(request.POST)

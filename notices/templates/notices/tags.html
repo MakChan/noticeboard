@@ -1,0 +1,29 @@
+
+{% extends 'notices/base.html' %}
+
+{% load humanize %}
+
+{% block title %}
+  Tags - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+	
+		<ol class="breadcrumb my-4">
+		    <li class="breadcrumb-item active"> Tags</li>
+		</ol>
+	    <table class="table">
+	      <tbody>
+	      	{% if tags %}
+		        {% for tag in tags %}
+		          <tr>
+		            <td>
+		              <a href="{% url 'notices:tag' tag %}"> {{ tag }} </a><br>
+		            </td>
+		          </tr>
+		        {% endfor %}
+		      </tbody>
+		     {% endif %}
+	    </table>
+
+{% endblock %}
