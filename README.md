@@ -9,8 +9,11 @@ Written in Django.
 
 ### Features
 * Administrators/teachers can sign in and post notices.
-* Individual pages for each notice.
-* Search notices by tags/categories.
+* Students can view notices.
+* Individual page for each notice.
+* View notices by tags/categories.
+* View all notices by a teacher.
+* Notices can be written in markdown.
 * Responsive design.
 
 

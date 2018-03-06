@@ -12,7 +12,6 @@ class NoticeListView(ListView):
 	template_name = 'notices/home.html'
 	paginate_by = 10
 
-
 	def get_context_data(self, **kwargs):
 		return super().get_context_data(**kwargs)
 
@@ -20,13 +19,37 @@ class NoticeListView(ListView):
 		queryset = Notice.objects.order_by('-created_at')
 		return queryset
 
-def TagView(request, tag):
+class UserNoticeListView(ListView):
+	model = Notice
+	context_object_name = 'notices'
+	template_name = 'notices/notices_by_user.html'
+	paginate_by = 10
 
-	notices = Notice.objects.filter(tags__icontains=tag+',').order_by('-created_at').values()
-	if len(notices) == 0:
-		return render(request, 'notices/no_tag.html', {'tag':tag})
+	def get_context_data(self, **kwargs):
+		context_data = super().get_context_data(**kwargs)		
+		context_data['username'] = self.kwargs['user']
+		return context_data
 
-	return render(request, 'notices/tag.html', {'notices': notices, 'tag':tag})
+	def get_queryset(self):
+		self.user = get_object_or_404(User, username=self.kwargs['user'])
+		return Notice.objects.filter(created_by=self.user).order_by('-created_at')
+
+
+class TagView(ListView):
+	model = Notice
+	context_object_name = 'notices'
+	template_name = 'notices/tag.html'
+	paginate_by = 10
+
+	def get_context_data(self, **kwargs):
+		context_data = super().get_context_data(**kwargs)		
+		context_data['tag'] = self.kwargs['tag']
+		return context_data
+
+	def get_queryset(self):
+		return Notice.objects.filter(tags__icontains=self.kwargs['tag']+',').order_by('-created_at')
+
+
 
 def TagListView(request) :
 	queryset = Notice.objects.filter(tags__isnull=False).values_list('tags', flat=True)
@@ -41,7 +64,6 @@ def NoticeView(request, notice_id) :
 
 @login_required
 def NewNoticePage(request) :
-
 	if request.method == 'POST':
 		form = NewNoticeForm(request.POST)
 		if form.is_valid():
@@ -52,4 +74,5 @@ def NewNoticePage(request) :
 	else:
 		form = NewNoticeForm()
 	return render(request, 'notices/new_notice.html', {'form': form})
+
 

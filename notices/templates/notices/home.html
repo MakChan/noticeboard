@@ -14,14 +14,23 @@
 		    <li class="breadcrumb-item active"> {% block breadcrumb %} Notices {% endblock %}</li>
 		</ol>
 	    <table class="table">
+	    	<thead class="thead-dark">
+	    		<tr>
+	    			<th>Title</th>
+	    			<th>User</th>
+	    			<th>Time</th>
+	    		</tr>
+	    	</thead>
 	      <tbody>
 	      	{% if notices %}
 		        {% for notice in notices %}
 		          <tr>
 		            <td>
-		              <a href="{% url 'notices:notice_page' notice.id %}"> {{ notice.title }} </a><br>
+		              <a href="{% url 'notices:notice_page' notice.id %}"> {{ notice.title }} </a>
 		            </td>
-		            <td>{{ notice.created_by }}</td>
+		            <td>
+		              <a href="{% url 'notices:user_notices' notice.created_by %}">{{ notice.created_by }} </a>
+		        	</td>
 		            <td>{{ notice.created_at|naturaltime }}</td>
 		          </tr>
 		        {% endfor %}

@@ -7,10 +7,7 @@
 
 {% block content %}
 
-		
-	<a href="{% url 'notices:home' %}">Back to homepage</a>
-
-	<form method="post" novalidate>
+	<form method="post" novalidate class="mt-5">
 	    {% csrf_token %}
     	{% include 'notices/form.html' %}
 	    <button type="submit" class="btn btn-success">Post</button>

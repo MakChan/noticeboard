@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3)bigi@1+z#6zlx!w)+f1qif3#)^9dm9wfcjqw@(d*-hpl5=89'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -120,6 +120,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
 
 LOGIN_REDIRECT_URL = 'notices:home'
 LOGOUT_REDIRECT_URL = 'notices:home'
