@@ -3,16 +3,15 @@
 
 ### About
 
-Website for posting notices or any other information by college/school/organization staff for the students/employees.
+Website for posting notices or any other information by college/school teachers/professors for the students. Written in Django.
 
-Written in Django.
 
 ### Features
-* Administrators/teachers can sign in and post notices.
-* Students can view notices.
+* Teachers can sign in and post notices.
+* Students can sign up/sign in and view notices.
 * Individual page for each notice.
 * View notices by tags/categories.
-* View all notices by a teacher.
+* View all notices by a particular teacher.
 * Notices can be written in markdown.
 * Responsive design.
 
